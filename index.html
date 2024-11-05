@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MangaBuddy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+        header {
+            background-color: #2d3748;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        h1 {
+            margin: 0;
+            color: #4299e1;
+        }
+        nav {
+            display: flex;
+            gap: 1rem;
+        }
+        main {
+            padding: 1rem;
+        }
+        .search-bar {
+            margin-bottom: 1rem;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 4px;
+            background-color: #4a5568;
+            color: #e2e8f0;
+        }
+        .featured-manga {
+            margin-bottom: 1rem;
+        }
+        .featured-manga img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .manga-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+        .manga-item {
+            text-align: center;
+        }
+        .manga-item img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>MangaBuddy</h1>
+        <nav>
+            <a href="#" id="homeLink">Home</a>
+            <a href="#" id="libraryLink">Library</a>
+            <a href="#" id="profileLink">Profile</a>
+        </nav>
+    </header>
+    <main>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search manga...">
+        </div>
+        <div class="featured-manga">
+            <h2>Featured Manga</h2>
+            <img src="https://via.placeholder.com/400x200?text=Featured+Manga" alt="Featured Manga">
+        </div>
+        <div class="manga-list">
+            <h2>Popular Manga</h2>
+            <div class="manga-grid" id="mangaGrid"></div>
+        </div>
+    </main>
+
+    <script>
+        const mangaList = [
+            { title: "Naruto", image: "https://via.placeholder.com/120x160?text=Naruto" },
+            { title: "One Piece", image: "https://via.placeholder.com/120x160?text=One+Piece" },
+            { title: "Attack on Titan", image: "https://via.placeholder.com/120x160?text=Attack+on+Titan" },
+            { title: "My Hero Academia", image: "https://via.placeholder.com/120x160?text=My+Hero+Academia" },
+            { title: "Death Note", image: "https://via.placeholder.com/120x160?text=Death+Note" },
+            { title: "Fullmetal Alchemist", image: "https://via.placeholder.com/120x160?text=Fullmetal+Alchemist" }
+        ];
+
+        function displayManga(mangas) {
+            const mangaGrid = document.getElementById('mangaGrid');
+            mangaGrid.innerHTML = '';
+            mangas.forEach(manga => {
+                const mangaItem = document.createElement('div');
+                mangaItem.className = 'manga-item';
+                mangaItem.innerHTML = `
+                    <img src="${manga.image}" alt="${manga.title}">
+                    <p>${manga.title}</p>
+                `;
+                mangaGrid.appendChild(mangaItem);
+            });
+        }
+
+        displayManga(mangaList);
+
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredManga = mangaList.filter(manga => 
+                manga.title.toLowerCase().includes(searchTerm)
+            );
+            displayManga(filteredManga);
+        });
+
+        document.getElementById('homeLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Home page');
+        });
+
+        document.getElementById('libraryLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Library page - Feature coming soon!');
+        });
+
+        document.getElementById('profileLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Profile page - Feature coming soon!');
+        });
+    </script>
+</body>
+</html>
